@@ -1,6 +1,6 @@
 # Reel to Video Redirect
 
-A lightweight Google Chrome extension that automatically redirects Reels to the standard video player interface, giving you back full video playback controls (progress bar, scrubbing, volume slider, and playback speed).
+A lightweight Google Chrome extension that automatically redirects Facebook Reels to the standard video player interface, giving you back full video playback controls (progress bar, scrubbing, volume slider, and playback speed).
 
 ---
 
