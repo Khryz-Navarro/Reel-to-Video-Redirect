@@ -8,11 +8,11 @@
     "*://www.facebook.com/*",
     "*://facebook.com/*"
   ],
-  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" },
+  "icons": { "16": "assets/icon16.png", "48": "assets/icon48.png", "128": "assets/icon128.png" },
   "action": {
     "default_title": "Reel to Video Redirect",
     "default_popup": "popup.html",
-    "default_icon": { "16": "icon16.png", "48": "icon48.png" }
+    "default_icon": { "16": "assets/icon16.png", "48": "assets/icon48.png" }
   },
   "background": { "service_worker": "background.js" },
   "declarative_net_request": {
