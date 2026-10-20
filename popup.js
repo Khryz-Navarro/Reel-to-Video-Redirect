@@ -4,7 +4,7 @@ const status = document.getElementById("status");
 function render(enabled) {
   toggle.checked = enabled;
   status.textContent = enabled
-    ? "ON: reel links open as /watch videos."
+    ? "ON: open reels as video player."
     : "OFF: reels open normally.";
 }
 

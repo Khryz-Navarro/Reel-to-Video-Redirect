@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Reel to Video Redirect",
+  "name": "Reel to Video Player Redirect",
   "version": "2.0.0",
   "description": "Opens Facebook reels in the regular video player (/watch). Toggle on or off from the toolbar.",
   "permissions": ["declarativeNetRequest", "storage"],
@@ -10,7 +10,7 @@
   ],
   "icons": { "16": "assets/icon16.png", "48": "assets/icon48.png", "128": "assets/icon128.png" },
   "action": {
-    "default_title": "Reel to Video Redirect",
+    "default_title": "Reels to Video Player Redirect",
     "default_popup": "popup.html",
     "default_icon": { "16": "assets/icon16.png", "48": "assets/icon48.png" }
   },
