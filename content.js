@@ -1,31 +1,33 @@
 // Handles Facebook's in-page (SPA) navigation, which never hits the network
 // and so can't be caught by the declarativeNetRequest rule in rules.json.
-
 const REEL_RE = /\/reel\/(\d+)/;
+let enabled = true;
 
-function toWatchUrl(id) {
-  return `https://www.facebook.com/watch?v=${id}`;
-}
+const toWatchUrl = (id) => `https://www.facebook.com/watch?v=${id}`;
 
-// 1) Current page is a reel (e.g. arrived via SPA navigation or back/forward)
 function checkCurrentUrl() {
+  if (!enabled) return;
   const m = location.pathname.match(REEL_RE);
   if (m) location.replace(toWatchUrl(m[1]));
 }
 
-// 2) Clicking any reel link anywhere on Facebook
+chrome.storage.sync.get({ enabled: true }, (v) => {
+  enabled = v.enabled;
+  checkCurrentUrl();
+});
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === "sync" && changes.enabled) enabled = changes.enabled.newValue !== false;
+});
+
 document.addEventListener(
   "click",
   (e) => {
-    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return; // keep new-tab clicks working
+    if (!enabled) return;
+    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
     const a = e.target.closest && e.target.closest("a[href]");
     if (!a) return;
     let url;
-    try {
-      url = new URL(a.href, location.href);
-    } catch {
-      return;
-    }
+    try { url = new URL(a.href, location.href); } catch { return; }
     if (!/(^|\.)facebook\.com$/.test(url.hostname)) return;
     const m = url.pathname.match(REEL_RE);
     if (!m) return;
@@ -36,9 +38,6 @@ document.addEventListener(
   true
 );
 
-// 3) Catch pushState/replaceState navigations (content scripts can't patch
-//    history directly, so watch the URL)
-checkCurrentUrl();
 let lastHref = location.href;
 setInterval(() => {
   if (location.href !== lastHref) {
