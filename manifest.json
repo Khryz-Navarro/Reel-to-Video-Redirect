@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Reels to Watch Redirect",
+  "version": "1.0.0",
+  "description": "Redirects facebook.com/reel/{id} to facebook.com/watch?v={id} so reels open as regular videos.",
+  "permissions": ["declarativeNetRequest"],
+  "host_permissions": [
+    "*://www.facebook.com/*",
+    "*://facebook.com/*"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "reel_redirect",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.facebook.com/*", "*://facebook.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
